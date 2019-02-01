@@ -13,6 +13,7 @@ require_relative 'hyperflow-amqp-executor/nfs_storage'
 require_relative 'hyperflow-amqp-executor/plgdata_storage'
 require_relative 'hyperflow-amqp-executor/gridftp_storage'
 require_relative 'hyperflow-amqp-executor/settings'
+require_relative 'hyperflow-amqp-executor/prometheus_endpoint'
 
 module Executor
   class << self

@@ -1,6 +1,6 @@
 
 require_relative 'database_loger'
-
+require_relative 'prometheus_endpoint'
 module Executor
   class Job
     attr_reader :metrics
@@ -8,9 +8,7 @@ module Executor
     def initialize(id, job)
       @job = job
       @id = id
-
-      @dataLoger = DatabaseLoger.new(ENV['INFLUXDB_URL'],Executor::id,@id,@job.options.procId,@job.options.hfId, @job.options.wfid,@job.executable)
-
+      @dataLoger = MetricEndpoint.new(Executor::id, @id, @job.options.procId, @job.options.hfId, @job.options.wfid, @job.executable)
       @metrics = {
               timestamps: { },
               executor: Executor::id
