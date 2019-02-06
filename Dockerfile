@@ -26,6 +26,7 @@ RUN gem install influxdb && \
     gem install pry && \
     gem install prometheus-client && \
     gem install async-http && \
+    gem install rack && \
     gem build hyperflow-amqp-executor.gemspec && \
     gem install hyperflow-amqp-executor
 

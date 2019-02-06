@@ -8,7 +8,7 @@ module Executor
     def initialize(id, job)
       @job = job
       @id = id
-      @dataLoger = MetricEndpoint.new(Executor::id, @id, @job.options.procId, @job.options.hfId, @job.options.wfid, @job.executable)
+      @dataLoger = PromClient::MetricEndpoint.new(Executor::id, @id, @job.options.procId, @job.options.hfId, @job.options.wfid, @job.executable)
       @metrics = {
               timestamps: { },
               executor: Executor::id

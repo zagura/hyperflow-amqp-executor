@@ -12,9 +12,12 @@
 # Defaults to AWS S3 with credentials passed in ENV
 :cloud_storage:
   :provider: AWS
-  :aws_access_key_id:        <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  :aws_access_key_id:        <%= ENV['AWS_ACCESS_KEY'] %>
   :aws_secret_access_key:    <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   :region:                   <%= ENV['AWS_REGION'] %>
 
+:prometheus_port: <%= ENV['PROMETHEUS_PORT'] || 9105 %>
 :plgdata:
   :proxy: <%= ENV['X509_USER_PROXY'] or "./grid_proxy "%>
+
+:monitor_engine: <% ENV['MONITOR_ENGINE'] %>

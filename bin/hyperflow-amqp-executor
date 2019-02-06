@@ -16,7 +16,7 @@ EM.threadpool_size = Executor::settings.threads
 EM.run do
   AMQP.connect(Executor::settings.amqp_url) do |connection|
     Executor::logger.info "Connected to AMQP broker... "
-
+    Executor::serve
     channel  = AMQP::Channel.new(connection)
     channel.prefetch(Executor::settings.threads)
 

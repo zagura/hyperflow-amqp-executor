@@ -7,6 +7,8 @@ gem 'recursive-open-struct', "~> 0.4"
 gem 'amqp', "~> 1.1"
 gem 'deep_merge', "~> 1.0"
 gem 'httpclient', "~> 2.6"
+gem 'prometheus-client', "~> 0.9"
+gem 'rack', "~> 2.0"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.

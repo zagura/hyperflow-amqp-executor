@@ -4,7 +4,9 @@ require 'recursive-open-struct'
 require 'open3'
 require 'tmpdir'
 require 'logger'
-
+require 'rack'
+require 'prometheus/middleware/collector'
+require 'prometheus/middleware/exporter'
 require_relative 'hyperflow-amqp-executor/helpers'
 require_relative 'hyperflow-amqp-executor/job'
 require_relative 'hyperflow-amqp-executor/local_storage'
@@ -34,7 +36,20 @@ module Executor
         end
       end.to_i
     end
+    def serve
+      if @app.nil?
+          @app = Rack::Builder.new do
+            use Rack::Deflater
+            use Prometheus::Middleware::Collector
+            use Prometheus::Middleware::Exporter
 
+            run ->(_) { [200, {'Content-Type' => 'text/html'}, ['OK']] }
+          end.to_app
+          Thread.new do
+            Rack::Handler::WEBrick.run(@app, :Port => 9105 )
+          end
+      end
+    end
     def publish_event(type, routing_key, payload = {})
       data = payload
       data['timestamp'] = Time.now.utc.to_f
